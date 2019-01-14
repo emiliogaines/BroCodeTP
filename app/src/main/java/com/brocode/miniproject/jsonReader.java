@@ -29,6 +29,8 @@ public class jsonReader {
     public static List<String> tasks;
     public static List<String[]> tasks_contributors;
 
+    public static int[] matrix_data;
+
 
     private static void parseJSON(String data) {
         Log.d("JSON -> ", data);
@@ -37,9 +39,11 @@ public class jsonReader {
 
 
             JSONObject budget = jsonReader.getJSONObject("budget");
+            JSONObject risk = jsonReader.getJSONObject("risk_matrix");
 
             budget_people = toStringArray(budget.getJSONArray("array_persons"));
             budget_hours = toStringArray(budget.getJSONArray("array_hours"));
+            matrix_data =  toIntArray(risk.getJSONArray("array_alternative_likelihood"));
 
             budget_maxBudget = budget.getInt("budget_amount");
 
