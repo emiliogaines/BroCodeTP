@@ -13,23 +13,28 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class jsonReader {
 
-    public static String[] budget_people;
-    public static String[] budget_hours;
+
+    public static HashMap<String, Integer> totalPeople;
+
+    public static int totalHours = 0;
 
     public static int budget_maxBudget;
 
+
     public static List<int[]> budget_PV_coordinats;
+    public static List<int[]> budget_AC_coordinats;
+    public static List<int[]> budget_EV_coordinats;
 
     public static List<String> schedule_list;
+    public static List<String[]> schedule_dates;
 
     public static List<String> tasks;
     public static List<String[]> tasks_contributors;
-
-    public static int[] matrix_data;
 
 
     private static void parseJSON(String data) {
@@ -39,21 +44,59 @@ public class jsonReader {
 
 
             JSONObject budget = jsonReader.getJSONObject("budget");
-            JSONObject risk = jsonReader.getJSONObject("risk_matrix");
 
-            budget_people = toStringArray(budget.getJSONArray("array_persons"));
-            budget_hours = toStringArray(budget.getJSONArray("array_hours"));
-            matrix_data =  toIntArray(risk.getJSONArray("array_alternative_likelihood"));
+
+            tasks = new ArrayList<>();
+            totalPeople = new HashMap<String, Integer>();
+
+            for (int i = 0; i < jsonReader.getJSONObject("tasks_contributors").names().length(); i++) {
+                String task = jsonReader.getJSONObject("tasks_contributors").names().get(i).toString();
+
+                tasks.add(task);
+
+                for (int o = 0; o < jsonReader.getJSONObject("tasks_contributors").getJSONObject(task).names().length(); o++) {
+                    String name = jsonReader.getJSONObject("tasks_contributors").getJSONObject(task).names().get(o).toString();
+
+                    Log.d("JSON DEBUGGER", name);
+
+                    for (int p = 0; p < jsonReader.getJSONObject("tasks_contributors").getJSONObject(task).getJSONArray(name).length(); p++) {
+                        int hour = jsonReader.getJSONObject("tasks_contributors").getJSONObject(task).getJSONArray(name).getInt(p);
+
+                        totalHours += hour;
+
+                        if (totalPeople.containsKey(name)) {
+                            totalPeople.put(name, totalPeople.get(name) + hour);
+                        } else {
+                            totalPeople.put(name, hour);
+                        }
+                    }
+                }
+            }
+
+
 
             budget_maxBudget = budget.getInt("budget_amount");
 
 
-            JSONArray arrayCoordinates = budget.getJSONArray("budget_PV_coordinates");
-
+            JSONArray arrayCoordinates1 = budget.getJSONArray("budget_PV_coordinates");
             budget_PV_coordinats = new ArrayList<>();
-            for (int i = 0; i < arrayCoordinates.length(); i++) {
-                int[] coords = toIntArray(arrayCoordinates.getJSONArray(i));
+            for (int i = 0; i < arrayCoordinates1.length(); i++) {
+                int[] coords = toIntArray(arrayCoordinates1.getJSONArray(i));
                 budget_PV_coordinats.add(new int[]{coords[0], coords[1]});
+            }
+
+            JSONArray arrayCoordinates2 = budget.getJSONArray("budget_AC_coordinates");
+            budget_AC_coordinats = new ArrayList<>();
+            for (int i = 0; i < arrayCoordinates2.length(); i++) {
+                int[] coords = toIntArray(arrayCoordinates2.getJSONArray(i));
+                budget_AC_coordinats.add(new int[]{coords[0], coords[1]});
+            }
+
+            JSONArray arrayCoordinates3 = budget.getJSONArray("budget_EV_coordinates");
+            budget_EV_coordinats = new ArrayList<>();
+            for (int i = 0; i < arrayCoordinates3.length(); i++) {
+                int[] coords = toIntArray(arrayCoordinates3.getJSONArray(i));
+                budget_EV_coordinats.add(new int[]{coords[0], coords[1]});
             }
 
 
@@ -64,22 +107,12 @@ public class jsonReader {
                 schedule_list.add(tasksList.get(i).toString());
             }
 
-            tasks = new ArrayList<>();
-            tasks_contributors = new ArrayList<>();
 
-            JSONObject tasksContributors = jsonReader.getJSONObject("tasks_contributors");
-            for (int i = 0; i < tasksContributors.length(); i++) {
-                JSONArray contributors = tasksContributors.getJSONArray(tasksContributors.names().getString(i));
+            schedule_dates = new ArrayList<>();
 
-                Log.d("JSON", tasksContributors.names().getString(i));
-
-                List<String> list = new ArrayList<>();
-                for (int o = 0; o < contributors.length(); o++) {
-                    list.add(contributors.get(o).toString());
-                    Log.d("JSON - ", contributors.get(o).toString());
-                }
-                tasks.add(tasksContributors.names().getString(i));
-                tasks_contributors.add(list.toArray(new String[0]));
+            JSONArray scheduleDates = jsonReader.getJSONArray("array_task_dates");
+            for (int i = 0; i < scheduleDates.length(); i++) {
+                schedule_dates.add(toStringArray(scheduleDates.getJSONArray(i)));
             }
 
 
