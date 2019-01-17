@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
 
 public class jsonReader {
 
@@ -35,42 +34,36 @@ public class jsonReader {
     public static List<String[]> schedule_dates;
 
     public static List<String> tasks;
-    public static List<String> tasks_contributors;
-
-    public static TreeMap<String, String[][]> taskData;
+    public static List<String[]> tasks_contributors;
+    public static int[] matrix_data;
+    public static String[] matrix_risks;
 
 
     private static void parseJSON(String data) {
-        //Log.d("JSON -> ", data);
+        Log.d("JSON -> ", data);
         try {
             JSONObject jsonReader = new JSONObject(data);
 
 
             JSONObject budget = jsonReader.getJSONObject("budget");
+            JSONObject risk = jsonReader.getJSONObject("risk_matrix");
 
 
             tasks = new ArrayList<>();
-            tasks_contributors = new ArrayList<>();
-
-            taskData = new TreeMap<>();
-
-            totalPeople = new HashMap<>();
-
-            List<String> cacheHours = new ArrayList<>();
-            List<String[]> cache = new ArrayList<>();
-
+            totalPeople = new HashMap<String, Integer>();
 
             for (int i = 0; i < jsonReader.getJSONObject("tasks_contributors").names().length(); i++) {
                 String task = jsonReader.getJSONObject("tasks_contributors").names().get(i).toString();
 
+                tasks.add(task);
+
                 for (int o = 0; o < jsonReader.getJSONObject("tasks_contributors").getJSONObject(task).names().length(); o++) {
-                    cacheHours.clear();
                     String name = jsonReader.getJSONObject("tasks_contributors").getJSONObject(task).names().get(o).toString();
-                    cacheHours.add(name);
+
+                    Log.d("JSON DEBUGGER", name);
+
                     for (int p = 0; p < jsonReader.getJSONObject("tasks_contributors").getJSONObject(task).getJSONArray(name).length(); p++) {
                         int hour = jsonReader.getJSONObject("tasks_contributors").getJSONObject(task).getJSONArray(name).getInt(p);
-
-                        cacheHours.add(String.valueOf(hour));
 
                         totalHours += hour;
 
@@ -80,20 +73,16 @@ public class jsonReader {
                             totalPeople.put(name, hour);
                         }
                     }
-
-                    cache.add(cacheHours.toArray(new String[0]));
-
                 }
-
-                taskData.put(task, cache.toArray(new String[0][0]));
-
             }
 
 
 
-
-
             budget_maxBudget = budget.getInt("budget_amount");
+
+            matrix_data=toIntArray(risk.getJSONArray("array_alternative_likelihood"));
+
+            matrix_risks=toStringArray(risk.getJSONArray("array_consequences"));
 
 
             JSONArray arrayCoordinates1 = budget.getJSONArray("budget_PV_coordinates");
@@ -197,6 +186,5 @@ public class jsonReader {
         }
         return arr;
     }
-
 
 }
