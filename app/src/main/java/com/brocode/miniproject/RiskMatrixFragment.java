@@ -49,9 +49,16 @@ public class RiskMatrixFragment extends Fragment {
     void setProgressBarValue(View root){
         int sum=0;
         int min=0;
-        int max=4*15;
+        int max=(4*5)+(8*5)+(12*5);
         for(int data:jsonReader.matrix_data){
-            sum=sum+data;
+            int count=1;
+            switch(count){
+                case 1: case 4: case 7: case 10: case 13: sum=sum+data*1; break;
+                case 2: case 5: case 8: case 11: case 14: sum=sum+data*2; break;
+                case 3: case 6: case 9: case 12: case 15: sum=sum+data*3; break;
+
+             }
+            count++;
         }
         ProgressBar bar= root.findViewById(R.id.progressBar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
