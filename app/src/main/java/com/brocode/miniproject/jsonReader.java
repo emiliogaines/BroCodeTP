@@ -35,6 +35,8 @@ public class jsonReader {
 
     public static List<String> tasks;
     public static List<String[]> tasks_contributors;
+    public static int[] matrix_data;
+    public static String[] matrix_risks;
 
 
     private static void parseJSON(String data) {
@@ -44,6 +46,7 @@ public class jsonReader {
 
 
             JSONObject budget = jsonReader.getJSONObject("budget");
+            JSONObject risk = jsonReader.getJSONObject("risk_matrix");
 
 
             tasks = new ArrayList<>();
@@ -76,6 +79,10 @@ public class jsonReader {
 
 
             budget_maxBudget = budget.getInt("budget_amount");
+
+            matrix_data=toIntArray(risk.getJSONArray("array_alternative_likelihood"));
+
+            matrix_risks=toStringArray(risk.getJSONArray("array_consequences"));
 
 
             JSONArray arrayCoordinates1 = budget.getJSONArray("budget_PV_coordinates");
@@ -179,6 +186,5 @@ public class jsonReader {
         }
         return arr;
     }
-
 
 }

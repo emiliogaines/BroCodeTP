@@ -26,6 +26,10 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".riskmatrixtable2"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

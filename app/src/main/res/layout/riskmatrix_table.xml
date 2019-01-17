@@ -118,7 +118,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6">
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/risk1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -128,7 +128,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/risk2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -138,7 +138,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/risk3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -148,7 +148,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/risk4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -158,7 +158,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/textView28"
+            android:id="@+id/risk5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -196,7 +196,7 @@
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="Low"
+                android:text="Catastrophic"
                 android:textAlignment="center"
                 android:textSize="14sp" />
 
@@ -204,24 +204,24 @@
                 android:id="@+id/cell2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent"
+                android:background="@android:color/holo_red_light"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Catastrophic"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent"
+                android:background="@color/pinkSusan"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Severe"
                 android:textAlignment="center" />
         </TableRow>
 
@@ -234,36 +234,36 @@
                 android:id="@+id/cell4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_green_light"
+                android:background="@android:color/holo_red_light"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="0dp"
-                android:text="TextView"
+                android:text="Catastrophic"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_red_light"
+                android:background="@color/pinkSusan"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Severe"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent"
+                android:background="@color/pinkSusan"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Severe"
                 android:textAlignment="center" />
         </TableRow>
 
@@ -276,36 +276,36 @@
                 android:id="@+id/cell7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_green_light"
+                android:background="@color/pinkSusan"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Severe"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent"
+                android:background="@android:color/holo_orange_dark"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="High"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_red_light"
+                android:background="@android:color/holo_orange_dark"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="High"
                 android:textAlignment="center" />
         </TableRow>
 
@@ -318,35 +318,36 @@
                 android:id="@+id/cell10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/pinkSusan"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
-                android:textAlignment="center"
-                android:background="@color/colorAccent" />
+                android:text="Severe"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell11"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_green_light"
+                android:background="@android:color/holo_orange_dark"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="High"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell12"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorAccent"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Moderate"
                 android:textAlignment="center" />
         </TableRow>
 
@@ -359,33 +360,36 @@
                 android:id="@+id/cell13"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorAccent"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Moderate"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell14"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@android:color/holo_green_light"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Low"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/cell15"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@android:color/holo_green_light"
                 android:paddingLeft="0dp"
                 android:paddingTop="10dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="16dp"
-                android:text="TextView"
+                android:text="Low"
                 android:textAlignment="center" />
         </TableRow>
     </TableLayout>
