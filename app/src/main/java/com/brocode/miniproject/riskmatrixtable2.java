@@ -18,7 +18,7 @@ public class riskmatrixtable2 extends Activity {
     void buildMatrix(){
         int count=0;
         for(int cell:RiskMatrixFragment.cells){
-            TextView textView_edit = findViewById(cell);
+            TextView textView_edit=findViewById(cell);
             switch(jsonReader.matrix_data[count]){
                 case 1: textView_edit.setBackgroundColor(Color.parseColor("#01DF01"));
                     textView_edit.setText("Low");
@@ -39,9 +39,9 @@ public class riskmatrixtable2 extends Activity {
         count=0;
 
         for(int risks:RiskMatrixFragment.risks) {
-            TextView textView_edit=findViewById(risks);
-            textView_edit.setText(jsonReader.matrix_risks[count]);
-            count++;
+        TextView textView_edit=findViewById(risks);
+        textView_edit.setText(jsonReader.matrix_risks[count]);
+        count++;
         }
     }
 
