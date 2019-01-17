@@ -2,12 +2,14 @@ package com.brocode.miniproject;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +20,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<Fragment> fragmentList = new ArrayList<>();
     List<String> fragmentTitle = new ArrayList<>();
+
 
 
     @Override
@@ -72,6 +76,52 @@ public class MainActivity extends AppCompatActivity {
         mSectionsPagerAdapter.notifyDataSetChanged();
     }
 
+    private void searchUser(String user){
+        StringBuilder message = new StringBuilder();
+
+        Log.d("DEBUG", "Size -> " + jsonReader.tasks_contributors.toString());
+
+        for(Map.Entry<String,String[][]> entry : jsonReader.taskData.entrySet()) {
+            String key = entry.getKey();
+            String[][] value = entry.getValue();
+            for (String[] taskContainer : value){
+                for (String taskData : taskContainer){
+                    if(taskData.toUpperCase().equals(user.toUpperCase())){
+                        message.append(key.replace("_contributors", "").replaceAll("_", " ").toUpperCase());
+                        message.append("\n");
+                        message.append("Week 1: ").append(taskContainer[1]).append(" h").append("\n");
+                        message.append("Week 2: ").append(taskContainer[2]).append(" h").append("\n");
+                        message.append("Week 3: ").append(taskContainer[3]).append(" h").append("\n");
+                        message.append("Week 4: ").append(taskContainer[4]).append(" h");
+                        message.append("\n");
+                        message.append("\n");
+                    }
+                }
+            }
+
+
+        }
+
+        if(message.toString().equals("")){
+            message.append("No results found...");
+        }
+
+
+
+
+
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle(user.toUpperCase() + ":")
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Whatever...
+                    }
+                }).show();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu) {
@@ -83,9 +133,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // Toast like print
-                Log.d("APP", query);
+
                 if( ! searchView.isIconified()) {
                     searchView.setIconified(true);
+                    searchUser(query);
                 }
                 myActionMenuItem.collapseActionView();
                 return false;
@@ -105,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
 
